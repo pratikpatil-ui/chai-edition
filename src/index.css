@@ -42,6 +42,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   margin: 0;
@@ -49,7 +53,9 @@ body {
   background: var(--ink);
   color: var(--cream);
   min-height: 100%;
-  overflow-x: hidden;
+  /* DO NOT set overflow-x: hidden here — it silently breaks position: sticky
+     for the ScrollTransformationJourney stage. The stage clips its own
+     horizontal overflow via .stage { overflow: hidden }. */
 }
 
 body {

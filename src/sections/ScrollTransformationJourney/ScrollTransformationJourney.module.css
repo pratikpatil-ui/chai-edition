@@ -1,0 +1,312 @@
+.track {
+  position: relative;
+  width: 100%;
+  height: 720vh;
+  background: var(--ink);
+}
+
+.anchor {
+  position: absolute;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  isolation: isolate;
+}
+
+/* ---------- Central image stage ---------- */
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.imgLayer {
+  position: absolute;
+  inset: 0;
+  will-change: opacity, transform;
+}
+
+.imgLayer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.96) contrast(1.05);
+  transform-origin: center center;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 80% at 50% 10%,
+      rgba(18, 13, 10, 0.28) 0%,
+      rgba(18, 13, 10, 0.6) 55%,
+      rgba(18, 13, 10, 0.94) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(18, 13, 10, 0.18) 0%,
+      rgba(18, 13, 10, 0.45) 40%,
+      rgba(18, 13, 10, 0.88) 100%
+    );
+}
+
+.steam {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(50% 35% at 50% 100%, rgba(245, 235, 221, 0.06), transparent 70%),
+    radial-gradient(70% 50% at 60% 110%, rgba(216, 154, 43, 0.05), transparent 60%);
+  mix-blend-mode: screen;
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background-image:
+    radial-gradient(rgba(245, 235, 221, 0.04) 1px, transparent 1px),
+    radial-gradient(rgba(245, 235, 221, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+/* ---------- Top meta strip ---------- */
+
+.topMeta {
+  position: absolute;
+  top: 24px;
+  left: var(--gutter);
+  right: var(--gutter);
+  z-index: 7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  pointer-events: none;
+}
+
+/* ---------- Caption block (bottom-left, plain text — no boxes) ---------- */
+
+.captions {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+
+.caption {
+  position: absolute;
+  left: var(--gutter);
+  bottom: clamp(110px, 18vh, 180px);
+  right: var(--gutter);
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  will-change: opacity, transform;
+}
+
+.stageMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+
+.stageNum {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+}
+
+.stageDivider {
+  color: var(--cream-mute);
+}
+
+.captionText {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(32px, 5.4vw, 64px);
+  line-height: 1.06;
+  letter-spacing: -0.018em;
+  color: var(--cream);
+  margin: 0;
+  max-width: 16ch;
+}
+
+/* ---------- Saffron progress rail ---------- */
+
+.rail {
+  position: absolute;
+  right: clamp(20px, 4vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 7;
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  height: 64%;
+  pointer-events: none;
+}
+
+.railLabels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  text-align: right;
+  transition: color 280ms ease;
+}
+
+.railLabels li {
+  position: relative;
+  line-height: 1;
+  white-space: nowrap;
+  transition: color 280ms ease;
+}
+
+.railLabels li.tickActive {
+  color: var(--saffron);
+}
+
+.railLabels li::after {
+  /* Saffron dot lined up with the track on the right. */
+  content: '';
+  position: absolute;
+  right: -25px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin-top: -3.5px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--ink);
+  transition: background 280ms ease, border-color 280ms ease, transform 280ms ease;
+}
+
+.railLabels li.tickActive::after {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  transform: scale(1.4);
+}
+
+.railTrack {
+  position: relative;
+  width: 1px;
+  background: var(--border);
+}
+
+.railFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--saffron), var(--clay));
+  transform-origin: top center;
+  will-change: transform;
+}
+
+/* ---------- Reduced-motion fallback (and very small screens) ---------- */
+
+.fallback {
+  background: var(--ink);
+  padding: 80px 0 60px;
+}
+
+.fallbackStage {
+  padding: 64px var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 80px);
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+
+.fallbackStage img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+.fallbackStage .captionText {
+  font-size: clamp(24px, 3.4vw, 36px);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .track {
+    height: 660vh;
+  }
+}
+
+@media (max-width: 720px) {
+  .track {
+    height: 600vh;
+  }
+  .rail {
+    display: none;
+  }
+  .caption {
+    bottom: 90px;
+  }
+  .captionText {
+    font-size: clamp(28px, 7vw, 44px);
+  }
+  .topMeta {
+    font-size: 9px;
+    letter-spacing: 0.26em;
+  }
+  .fallbackStage {
+    grid-template-columns: 1fr;
+  }
+  .fallbackStage img {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (max-width: 480px) {
+  .track {
+    height: 540vh;
+  }
+}

@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import ScrollProgress from './components/ScrollProgress/ScrollProgress';
-import VideoBackground from './components/VideoBackground/VideoBackground';
-import Hero from './sections/Hero/Hero';
-import Editions from './sections/Editions/Editions';
-import FieldNotes from './sections/FieldNotes/FieldNotes';
-import BrewingRitual from './sections/BrewingRitual/BrewingRitual';
+import MinimalHero from './sections/MinimalHero/MinimalHero';
+import ScrollTransformationJourney from './sections/ScrollTransformationJourney/ScrollTransformationJourney';
+import CinematicVideoInterlude from './sections/CinematicVideoInterlude/CinematicVideoInterlude';
+import RegionalEditions from './sections/RegionalEditions/RegionalEditions';
 import Collection from './sections/Collection/Collection';
 import Colophon from './sections/Colophon/Colophon';
 import CTA from './sections/CTA/CTA';
@@ -23,15 +22,14 @@ function App() {
   return (
     <>
       <LoadingScreen isVisible={isLoading} />
-      <VideoBackground />
       <ScrollProgress />
       <Header />
 
       <main id="main">
-        <Hero />
-        <Editions />
-        <FieldNotes />
-        <BrewingRitual />
+        <MinimalHero />
+        <ScrollTransformationJourney />
+        <CinematicVideoInterlude />
+        <RegionalEditions />
         <Collection />
         <Colophon />
         <CTA />

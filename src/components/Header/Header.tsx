@@ -1,7 +1,30 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { navLinks } from '../../data/editionData';
 import styles from './Header.module.css';
+
+const navItems = [
+  { label: 'The Transformation', href: '#journey' },
+  { label: 'Interlude', href: '#interlude' },
+  { label: 'The Editions', href: '#editions' },
+  { label: 'The Collection', href: '#collection' },
+  { label: 'Colophon', href: '#colophon' },
+];
+
+const drawerItems = [
+  { label: 'Cover · Begin the ritual', href: '#cover' },
+  { label: 'Stage 01 · Raw', href: '#stage-raw' },
+  { label: 'Stage 02 · Crush', href: '#stage-crush' },
+  { label: 'Stage 03 · Heat', href: '#stage-heat' },
+  { label: 'Stage 04 · Brew', href: '#stage-brew' },
+  { label: 'Stage 05 · Simmer', href: '#stage-simmer' },
+  { label: 'Stage 06 · Pour', href: '#stage-pour' },
+  { label: 'Stage 07 · Serve · Sip', href: '#stage-serve' },
+  { label: 'Stage 08 · The Collection Reveal', href: '#stage-collection' },
+  { label: 'Cinematic Interlude', href: '#interlude' },
+  { label: 'The Editions', href: '#editions' },
+  { label: 'The Collection', href: '#collection' },
+  { label: 'Colophon', href: '#colophon' },
+];
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -25,20 +48,22 @@ function Header() {
     <>
       <header className={styles.header}>
         <div className={`container ${styles.bar}`}>
-          <a href="#top" className={styles.brand} aria-label="Chai Edition — home">
-            <span>Chai <em>Edition</em></span>
+          <a href="#journey" className={styles.brand} aria-label="Chai Edition, back to the cover">
+            <span>
+              Chai <em>Edition</em>
+            </span>
           </a>
 
           <span className={styles.metaCenter} aria-hidden="true">
             VOL. 01 · DIGITAL ISSUE
           </span>
 
-          <nav className={styles.nav} aria-label="Edition sections">
-            <a className={styles.navLink} href="#editions">Editions</a>
-            <a className={styles.navLink} href="#field-notes">Field Notes</a>
-            <a className={styles.navLink} href="#ritual">Ritual</a>
-            <a className={styles.navLink} href="#collection">Collection</a>
-            <a className={styles.navLink} href="#colophon">Colophon</a>
+          <nav className={styles.nav} aria-label="Primary sections">
+            {navItems.map((item) => (
+              <a key={item.href} className={styles.navLink} href={item.href}>
+                {item.label}
+              </a>
+            ))}
           </nav>
 
           <button
@@ -68,9 +93,9 @@ function Header() {
             transition={{ duration: 0.3 }}
           >
             <ul className={styles.drawerList}>
-              {navLinks.map((link, idx) => (
+              {drawerItems.map((link, idx) => (
                 <motion.li
-                  key={link.href}
+                  key={link.href + idx}
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.05 + idx * 0.04 }}

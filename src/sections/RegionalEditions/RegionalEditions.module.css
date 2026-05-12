@@ -1,0 +1,233 @@
+.section {
+  position: relative;
+  padding: clamp(110px, 16vh, 180px) 0 clamp(80px, 12vh, 140px);
+  background: linear-gradient(
+    180deg,
+    var(--ink) 0%,
+    rgba(22, 17, 13, 0.98) 100%
+  );
+  border-top: 1px solid var(--border);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+  margin-bottom: clamp(64px, 10vh, 120px);
+  flex-wrap: wrap;
+}
+
+.headCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--saffron);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  color: var(--cream);
+  font-weight: 400;
+  margin: 0;
+}
+
+.kicker {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: var(--cream-soft);
+  max-width: 560px;
+}
+
+.meta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ---------- Chapter spreads (vertical magazine layout) ---------- */
+
+.chapters {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(32px, 5vw, 88px);
+  align-items: center;
+  padding: clamp(72px, 11vh, 130px) 0;
+  border-top: 1px solid var(--border);
+}
+
+.chapter:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.chapterReverse {
+  grid-template-columns: 1fr 1.05fr;
+}
+
+.chapterReverse .copy {
+  order: 2;
+}
+
+.chapterReverse .frame {
+  order: 1;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 520px;
+}
+
+.chapterMeta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.chapterNum {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--saffron);
+  letter-spacing: 0.02em;
+}
+
+.chapterDivider {
+  color: var(--cream-mute);
+}
+
+.chapterRegion {
+  color: var(--cream-mute);
+}
+
+.chapterName {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  color: var(--cream);
+  font-weight: 400;
+  margin: 0;
+}
+
+.chapterCue {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(17px, 1.6vw, 22px);
+  line-height: 1.5;
+  color: var(--cream-soft);
+  margin: 0;
+}
+
+.chapterFootline {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+}
+
+.chapterFootline::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--cream-mute);
+}
+
+/* ---------- Image frame ---------- */
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--espresso);
+  border: 1px solid var(--border);
+  isolation: isolate;
+}
+
+.frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(18, 13, 10, 0) 60%,
+    rgba(18, 13, 10, 0.45) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.05);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.chapter:hover .image {
+  transform: scale(1.03);
+}
+
+@media (max-width: 860px) {
+  .chapter,
+  .chapterReverse {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .chapterReverse .copy {
+    order: 2;
+  }
+
+  .chapterReverse .frame {
+    order: 1;
+  }
+
+  .frame {
+    aspect-ratio: 5 / 4;
+  }
+
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .meta {
+    text-align: left;
+  }
+}

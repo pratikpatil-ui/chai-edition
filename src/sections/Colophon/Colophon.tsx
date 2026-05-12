@@ -5,9 +5,9 @@ import modernCafe from '../../assets/images/chai_09_modern_chai_cafe.jpg';
 import styles from './Colophon.module.css';
 
 const specs: { label: string; value: ReactNode }[] = [
-  { label: 'Issue', value: 'Vol. 01 — First Digital Issue' },
-  { label: 'Subject', value: 'Indian chai culture, regional editions' },
-  { label: 'Editor & Builder', value: 'A full-stack & React Native developer' },
+  { label: 'Issue', value: 'Vol. 01 · First Digital Issue' },
+  { label: 'Subject', value: 'Indian chai culture, brewed across regions' },
+  { label: 'Editor & Builder', value: 'A full-stack and React Native developer who refuses to skip his morning cup' },
   { label: 'Stack', value: 'React · Vite · TypeScript · Framer Motion' },
   { label: 'Visuals', value: <>AI-assisted, <em>art-directed by hand</em></> },
   { label: 'Hosting', value: 'Vercel · GitHub' },
@@ -29,23 +29,19 @@ function Colophon() {
               eyebrow="Colophon"
               title="Built as a digital edition."
             />
-            <p className={styles.body}>
-              Chai Edition was created as an AI-assisted frontend portfolio project combining
-              personal storytelling, Indian chai culture, AI-generated visuals, React,
-              TypeScript, motion design, accessibility, performance awareness, GitHub, and
-              Vercel deployment.
-            </p>
-            <p className={styles.body}>
-              AI accelerated visuals and scaffolding. The concept, naming, art direction,
-              prompts, frontend architecture, accessibility checks, performance work, and
-              deployment workflow were owned personally.
-            </p>
             <blockquote className={styles.pullquote}>
               <p>
-                “I designed it like a cinematic digital magazine, where each scroll section
-                is an edition of Indian chai culture.”
+                “I wanted it to feel like a magazine you read with a cup in
+                hand. Every scroll, a new edition of the chai I grew up loving.”
               </p>
             </blockquote>
+            <p className={styles.body}>
+              Chai Edition began as a personal love note to a drink I have
+              watched simmer on the stove since I was small. The frontend is
+              React and TypeScript, built clean and quiet. The imagery is
+              AI-assisted, but every word, every cup, every framing, every line
+              of code, and every late-night polish is mine.
+            </p>
           </div>
 
           <div className={styles.specs}>
@@ -68,7 +64,7 @@ function Colophon() {
           <img
             className={styles.featureImage}
             src={modernCafe}
-            alt="A contemporary chai café — warm wood, low light, and a single cup of chai catching the glow."
+            alt="A contemporary chai café, warm wood, low light, and a single cup of chai catching the glow."
             loading="lazy"
             decoding="async"
           />
@@ -76,7 +72,7 @@ function Colophon() {
           <figcaption className={styles.featureCopy}>
             <span className={styles.featureEyebrow}>Closing Spread</span>
             <p className={styles.featureTitle}>
-              The same ritual, in a modern room. Old chai, new edition.
+              The same ritual, brought into a quieter room. Old chai, new edition.
             </p>
           </figcaption>
         </motion.figure>

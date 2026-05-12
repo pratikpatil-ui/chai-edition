@@ -1,16 +1,19 @@
-export interface Edition {
+export interface JourneyStage {
   id: string;
-  label: string;
-  title: string;
-  text: string;
+  number: number;
+  word: string;
+  caption: string;
   image: string;
   imageAlt: string;
 }
 
-export interface Ingredient {
+export interface CulturalEdition {
   id: string;
+  region: string;
   name: string;
-  note: string;
+  cue: string;
+  image: string;
+  imageAlt: string;
 }
 
 export interface Product {
@@ -20,15 +23,4 @@ export interface Product {
   tastingNotes: string;
   image: string;
   imageAlt: string;
-}
-
-export interface BrewingStep {
-  step: number;
-  title: string;
-  detail: string;
-}
-
-export interface NavLink {
-  label: string;
-  href: string;
 }

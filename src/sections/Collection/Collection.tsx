@@ -16,14 +16,14 @@ function Collection() {
       <div className="container">
         <div className={styles.head}>
           <SectionTitle
-            eyebrow="ED. 07 — The Collection"
-            title="Three blends. One editorial line."
-            kicker="Imagined as the shelf at the back of the kitchen — the cups you reach for on a tired morning, a slow afternoon, a festive evening."
+            eyebrow="The Final Reveal"
+            title="Now the cup has a name."
+            kicker="After the steam, after the pour, three blends arrive on the shelf. The same warmth, held in three different memories of it."
           />
           <p className={styles.headMeta}>
-            № 01 — № 03
+            № 01 · № 03
             <br />
-            Editorial Concept
+            Editorial Collection
           </p>
         </div>
 
@@ -37,7 +37,7 @@ function Collection() {
           <img
             className={styles.bannerImage}
             src={collectionBanner}
-            alt="An editorial flat-lay of Chai Edition blends — masala, kulhad, and saffron cardamom — composed on a warm dark surface."
+            alt="An editorial flat-lay of Chai Edition blends, masala, kulhad, and saffron cardamom, composed on a warm dark surface."
             loading="lazy"
             decoding="async"
           />
@@ -45,7 +45,8 @@ function Collection() {
           <figcaption className={styles.bannerCopy}>
             <span className={styles.bannerEyebrow}>The Shelf</span>
             <p className={styles.bannerTitle}>
-              Three editions, side by side — the same warmth, three different cups.
+              The making is done. The pouring is done. All that is left is the
+              cup, and the small, soft quiet that always follows.
             </p>
           </figcaption>
         </motion.figure>

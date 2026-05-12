@@ -19,11 +19,11 @@ function CTA() {
         >
           <span className={styles.eyebrow}>Closing Edition</span>
           <h2 className={styles.title}>
-            A personal ritual, shaped into a <em>digital product.</em>
+            A childhood ritual, poured into a <em>digital edition.</em>
           </h2>
           <p className={styles.body}>
-            This project turns a real personal interest into a premium editorial frontend
-            experience.
+            Some things should never lose their warmth, even when they move
+            onto a screen. This is chai, kept exactly the way I remember it.
           </p>
           <div className={styles.row}>
             <a

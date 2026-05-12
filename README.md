@@ -31,17 +31,17 @@ No backend. No CMS. No heavyweight UI library. The project is deliberately small
 
 ## Features
 
-- Cinematic editorial cover with fixed video background and poster fallback
-- Seven scroll-driven editions (ED. 00 — ED. 06)
-- Editorial Field Notes grid for chai ingredients
-- A five-step brewing ritual section
-- An editorial Collection with three product cards
-- Colophon page with project credits and spec sheet
-- Closing CTA + magazine-style footer
-- Fixed editorial header with collapsible drawer navigation on mobile
+- **Cinematic scroll-driven journey** — a single pinned 760vh stage where scroll position drives layered image crossfades, video time-scrubbing, chapter caption reveals, and an editorial side rail
+- **Cover + 8 editorial chapters** — ED. 00 The Pour → ED. 07 The Collection, surfaced as cinematic captions over a continuous visual journey instead of stacked content cards
+- **Brewing ritual** woven into ED. 06 as five numbered editorial steps (not a separate boxed section)
+- **Ingredient whispers** — subtle floating Hindi-named particles (Adrak, Elaichi, Dalchini, Kesar…) drifting behind the chapter captions
+- **Editorial Collection** with three editorial product cards as the resolution after the journey ends
+- **Colophon** with project credits, spec sheet, and a closing cinematic spread
+- **Closing CTA** + magazine-style footer
+- Fixed editorial header with collapsible drawer navigation (drawer links jump to specific chapters via anchor sentinels)
 - Scroll progress indicator powered by Framer Motion `useScroll`
 - Loading screen with brand reveal
-- Full `prefers-reduced-motion` support
+- Full `prefers-reduced-motion` support — falls back to a clean stacked layout
 - Open Graph + Twitter meta, semantic HTML, single H1
 
 ## AI-assisted workflow
@@ -77,23 +77,17 @@ src/
     Header/
     LoadingScreen/
     ScrollProgress/
-    VideoBackground/
     SectionTitle/
-    EditionCard/
     ProductCard/
   sections/   # composed page sections
-    Hero/
-    Editions/
-    FieldNotes/
-    BrewingRitual/
-    Collection/
-    Colophon/
-    CTA/
-    Footer/
+    CinematicJourney/   # the pinned scroll-driven stage (cover + 8 chapters)
+    Collection/         # the resolution: three editorial product cards
+    Colophon/           # credits, spec sheet, closing spread
+    CTA/                # closing edition with project links
+    Footer/             # brand, columns, build credits
   data/       # typed content modules
-    editionData.ts
-    productData.ts
-    ingredientData.ts
+    journeyData.ts      # cover + chapter content for the journey
+    productData.ts      # collection products
   types/
     index.ts
   App.tsx
@@ -104,8 +98,23 @@ src/
 **Why this shape:**
 - `components/` holds reusable building blocks (cards, titles, chrome).
 - `sections/` composes those blocks into magazine "spreads."
+- `CinematicJourney/` is the centerpiece — a single pinned section that owns the entire scroll narrative (video scrub, layered images, captions, side rail) instead of stacking many small content sections.
 - `data/` keeps copy out of components so editorial content is editable in one place.
 - `types/` centralizes the small public type surface.
+
+## How scroll controls the experience
+
+`CinematicJourney` declares a tall outer `<section>` (760 vh on desktop, 600 vh on small screens). Inside it sits a `position: sticky; top: 0; height: 100vh` stage that stays pinned while the user scrolls through the track.
+
+A single Framer Motion `useScroll({ target, offset: ['start start', 'end end'] })` produces one `MotionValue<number>` — `scrollYProgress`, going 0 → 1 across the track. Everything reads from it:
+
+- **Video scrub** — `useMotionValueEvent` reads progress; a RAF-throttled handler sets `video.currentTime = progress × duration`, so scrolling literally drags the cinematic loop forward or backward.
+- **Image crossfade** — each chapter image is mounted as a full-bleed layer. A `useTransform` per layer maps progress to a `[0, 1, 1, 0]` opacity window centered on that chapter's stop, with a small scale offset for parallax feel.
+- **Caption reveals** — the same windowing approach drives the editorial captions (label, headline, body, optional ritual steps), so text fades in only while its chapter is active.
+- **Side rail** — `useMotionValueEvent` also updates a single piece of React state (`stopIndex`) so the side rail re-renders only when the active chapter changes, never on every frame.
+- **Anchor sentinels** — drawer links like `#ed-03` work because each chapter has an invisible 1-pixel sentinel positioned within the track at the right scroll location via CSS `calc()`.
+
+If the user has `prefers-reduced-motion: reduce`, the component swaps to a flat stacked layout (one chapter per article, native image lazy-loading, no pinning, no scrubbing). No scroll listeners, no Framer side effects.
 
 ## Performance considerations
 
