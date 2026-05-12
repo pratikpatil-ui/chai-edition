@@ -1,0 +1,55 @@
+.shell {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.01em;
+  color: var(--cream);
+}
+
+.brand em {
+  font-style: italic;
+  color: var(--saffron);
+  font-weight: 400;
+}
+
+.meta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cream-mute);
+}
+
+.bar {
+  position: relative;
+  width: clamp(180px, 28vw, 280px);
+  height: 1px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.barFill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  height: 100%;
+  background: var(--saffron);
+  transform-origin: left center;
+}
