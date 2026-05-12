@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import logo from '../../assets/images/chai-edition-logo.png';
 import styles from './Header.module.css';
 
 const navItems = [
@@ -48,8 +49,16 @@ function Header() {
     <>
       <header className={styles.header}>
         <div className={`container ${styles.bar}`}>
-          <a href="#journey" className={styles.brand} aria-label="Chai Edition, back to the cover">
-            <span>
+          <a href="#cover" className={styles.brand} aria-label="Go to Chai Edition home">
+            <img
+              src={logo}
+              alt="Chai Edition logo"
+              className={styles.brandLogo}
+              width={36}
+              height={36}
+              decoding="async"
+            />
+            <span className={styles.brandText}>
               Chai <em>Edition</em>
             </span>
           </a>

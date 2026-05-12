@@ -1,3 +1,4 @@
+import logo from '../../assets/images/chai-edition-logo.png';
 import styles from './Footer.module.css';
 
 function Footer() {
@@ -8,7 +9,18 @@ function Footer() {
       <div className="container">
         <div className={styles.top}>
           <div>
-            <p className={styles.brand}>Chai <em>Edition</em></p>
+            <div className={styles.brandRow}>
+              <img
+                src={logo}
+                alt="Chai Edition logo"
+                className={styles.brandLogo}
+                width={48}
+                height={48}
+                loading="lazy"
+                decoding="async"
+              />
+              <p className={styles.brand}>Chai <em>Edition</em></p>
+            </div>
             <p className={styles.tagline}>India, brewed in editions.</p>
           </div>
 
